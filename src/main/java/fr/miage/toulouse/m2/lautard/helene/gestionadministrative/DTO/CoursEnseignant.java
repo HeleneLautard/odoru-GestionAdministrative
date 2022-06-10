@@ -5,17 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Adherent {
-
-    private Long id;
-    private String nom;
-    private String prenom;
+public class CoursEnseignant {
+    private String numCours;
+    private String titre;
     private int niveau;
-    private String aptitudeMedicale;
-    private String statutInscription;
-    private String statutPaiement;
+    private Date date;
+    private String lieu;
+    private long duree;
+    private Long idEnseignant;
 }

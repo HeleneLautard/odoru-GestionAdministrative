@@ -1,5 +1,6 @@
 package fr.miage.toulouse.m2.lautard.helene.gestionadministrative.repositories;
 
+import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO.CoursEnseignant;
 import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO.CoursEnseignantParticipants;
 import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.exceptions.MauvaisNiveauException;
 import org.springframework.stereotype.Repository;
@@ -23,7 +24,7 @@ public interface CoursEnseignantParticipantsRepository {
      * @param cours cours que l'on souhaite créer
      * @return cours
      */
-    public CoursEnseignantParticipants ajouterParticipants(int niveau, CoursEnseignantParticipants cours);
+    public CoursEnseignantParticipants ajouterParticipants(int niveau, CoursEnseignant cours);
 
     /**
      * Enregistrer la participation d'un élève à un cours
@@ -32,4 +33,11 @@ public interface CoursEnseignantParticipantsRepository {
      * @return
      */
     public CoursEnseignantParticipants participerCours(CoursEnseignantParticipants cours, Long idParticipant);
+
+    /**
+     * Créer un nouveau cours
+     * @param cours cours que l'on souhaite créer
+     * @return
+     */
+    public CoursEnseignantParticipants creerCours(CoursEnseignant cours) throws MauvaisNiveauException;
 }

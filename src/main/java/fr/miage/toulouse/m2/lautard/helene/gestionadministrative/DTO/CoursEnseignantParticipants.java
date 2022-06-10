@@ -12,13 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CoursEnseignantParticipants {
-    private String id;
-    private String titre;
-    private String lieu;
-    private Date date;
-    private int niveau;
-    private long duree;
-    private Enseignant enseignant;
+public class CoursEnseignantParticipants extends CoursEnseignant {
     private List<Participant> listeParticipants;
+
+    public CoursEnseignantParticipants(String numCours, String titre, int niveau, Date date, String lieu, long duree, Long idEnseignant, List<Participant> listeParticipants) {
+        super(numCours, titre, niveau, date, lieu, duree, idEnseignant);
+        this.listeParticipants = listeParticipants;
+    }
 }

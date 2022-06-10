@@ -9,6 +9,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Participant extends Adherent{
-    private String statut = "PARTICIPANT";
+public class Participant {
+
+    private Long numMembre;
+    private boolean presence = false;
+
+    public Participant(Long id) {
+        this.numMembre=id;
+    }
 }

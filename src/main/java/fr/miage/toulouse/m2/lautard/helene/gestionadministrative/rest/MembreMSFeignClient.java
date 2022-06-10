@@ -1,5 +1,6 @@
 package fr.miage.toulouse.m2.lautard.helene.gestionadministrative.rest;
 
+import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO.Adherent;
 import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO.Enseignant;
 import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO.Participant;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -25,6 +26,6 @@ public interface MembreMSFeignClient {
     @RequestMapping(method = RequestMethod.GET,
             value="/membres/adherents/niveau/{niveau}",
             produces= "application/json")
-    List<Participant> getParticipantsNiveau(@PathVariable int niveau);
+    List<Adherent> getParticipantsNiveau(@PathVariable int niveau);
 
 }
