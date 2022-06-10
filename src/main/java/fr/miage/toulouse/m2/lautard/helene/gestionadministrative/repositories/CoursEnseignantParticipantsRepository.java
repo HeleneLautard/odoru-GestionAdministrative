@@ -17,9 +17,19 @@ public interface CoursEnseignantParticipantsRepository {
      */
     public void checkNiveauEnseignant(Long idEnseignant, int niveauCours) throws MauvaisNiveauException;
 
-    // Pour la création d'un cours, on souhaite inscrire tous les membres du même niveau que le cours
+    /**
+     * Ajouter tous les adhérents du niveau donné comme participants à un cours
+     * @param niveau niveau
+     * @param cours cours que l'on souhaite créer
+     * @return cours
+     */
     public CoursEnseignantParticipants ajouterParticipants(int niveau, CoursEnseignantParticipants cours);
 
-    // Lorsqu'un élève badge pour un cours, on le note présent pour le cours donné.
+    /**
+     * Enregistrer la participation d'un élève à un cours
+     * @param cours
+     * @param idParticipant
+     * @return
+     */
     public CoursEnseignantParticipants participerCours(CoursEnseignantParticipants cours, Long idParticipant);
 }

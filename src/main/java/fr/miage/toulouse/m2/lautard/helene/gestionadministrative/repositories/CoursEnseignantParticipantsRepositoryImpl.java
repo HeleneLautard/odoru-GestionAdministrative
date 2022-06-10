@@ -32,7 +32,8 @@ public class CoursEnseignantParticipantsRepositoryImpl implements CoursEnseignan
                 .collect(Collectors.toList());
         List<Integer> listF = null;
         for(String s : listeIds) listF.add(Integer.valueOf(s));
-        return null;
+        cours.setListeParticipants(listeParticipantsBase);
+        return cours;
     }
 
     @Override
