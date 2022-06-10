@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: GestionAdministrative
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+
+logging:
+  level:
+    org.springframework.web: INFO
+server:
+  port: 10004
