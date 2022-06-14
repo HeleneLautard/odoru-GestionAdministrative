@@ -31,7 +31,7 @@ public class CoursEnseignantParticipantsRepositoryImpl implements CoursEnseignan
         List<Adherent> listeParticipantsBase = this.membreMSFeignClient.getParticipantsNiveau(niveau);
         ArrayList<Participant> participantList = new ArrayList<>();
         for(Adherent ad: listeParticipantsBase){
-            Participant p = new Participant(ad.getId());
+            Participant p = new Participant(ad.getNumMembre(), ad.getPrenom()+" "+ad.getNom());
             participantList.add(p);
         }
         CoursEnseignantParticipants coursResultat = new CoursEnseignantParticipants(
@@ -59,8 +59,15 @@ public class CoursEnseignantParticipantsRepositoryImpl implements CoursEnseignan
         checkNiveauEnseignant(idEnseignant, niveauCours);
         // Ajouter les participants
         CoursEnseignantParticipants coursFinal = ajouterParticipants(niveauCours, cours);
+        System.out.println(coursFinal.toString());
         // Appel REST sur MS-gestion-cours pour ajouter le cours avec les bonnes informations
         this.coursMSFeignClient.creerCours(coursFinal);
         return null;
+    }
+
+    @Override
+    public CoursEnseignantParticipants getCoursEnseignantParticipants(Long idCours) {
+        CoursEnseignantParticipants cours = this.coursMSFeignClient.getCours(idCours);
+        return ajouterParticipants(cours.getNiveau(), cours);
     }
 }

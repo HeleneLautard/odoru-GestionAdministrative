@@ -40,4 +40,11 @@ public interface CoursEnseignantParticipantsRepository {
      * @return
      */
     public CoursEnseignantParticipants creerCours(CoursEnseignant cours) throws MauvaisNiveauException;
+
+    /**
+     * Récupérer un cours avec les informations de l'enserignant et des participations
+     * @param idCours identifiant du cours
+     * @return
+     */
+    public CoursEnseignantParticipants getCoursEnseignantParticipants(Long idCours);
 }

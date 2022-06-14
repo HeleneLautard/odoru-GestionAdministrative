@@ -1,17 +1,15 @@
 package fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Adherent {
 
-    private Long id;
+    private Long numMembre;
     private String nom;
     private String prenom;
     private int niveau;

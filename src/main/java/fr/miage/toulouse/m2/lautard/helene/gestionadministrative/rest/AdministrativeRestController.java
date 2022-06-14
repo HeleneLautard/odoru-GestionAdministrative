@@ -5,10 +5,7 @@ import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.exceptions.Mauv
 import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.repositories.CoursEnseignantParticipantsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
@@ -17,6 +14,11 @@ public class AdministrativeRestController {
 
     @Autowired
     CoursEnseignantParticipantsRepository coursEnseignantParticipantsRepository;
+
+    @GetMapping(path="/cours/{id}")
+    public CoursEnseignantParticipants getCoursParticipantsEnseignant(@PathVariable("id") Long id){
+        return this.coursEnseignantParticipantsRepository.getCoursEnseignantParticipants(id);
+    }
 
     @PostMapping(path="/cours")
     public CoursEnseignantParticipants creerCours(@RequestBody CoursEnseignantParticipants cours){
@@ -27,4 +29,5 @@ public class AdministrativeRestController {
                     HttpStatus.BAD_REQUEST, ex.getMessage());
         }
     }
+
 }
