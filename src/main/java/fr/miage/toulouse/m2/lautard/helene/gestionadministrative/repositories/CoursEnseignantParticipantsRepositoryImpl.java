@@ -4,10 +4,11 @@ import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO.*;
 import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.exceptions.MauvaisNiveauException;
 import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.rest.CoursMSFeignClient;
 import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.rest.MembreMSFeignClient;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CoursEnseignantParticipantsRepositoryImpl implements CoursEnseignantParticipantsRepository{
 
@@ -16,6 +17,8 @@ public class CoursEnseignantParticipantsRepositoryImpl implements CoursEnseignan
 
     @Autowired
     CoursMSFeignClient coursMSFeignClient;
+
+    ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public void checkNiveauEnseignant(Long idEnseignant, int niveauCours) throws MauvaisNiveauException {
@@ -27,47 +30,44 @@ public class CoursEnseignantParticipantsRepositoryImpl implements CoursEnseignan
 
 
     @Override
-    public CoursEnseignantParticipants ajouterParticipants(int niveau, CoursEnseignant cours) {
+    public CoursDTO ajouterParticipants(int niveau, CoursDTO cours) {
         List<Adherent> listeParticipantsBase = this.membreMSFeignClient.getParticipantsNiveau(niveau);
         ArrayList<Participant> participantList = new ArrayList<>();
         for(Adherent ad: listeParticipantsBase){
             Participant p = new Participant(ad.getNumMembre(), ad.getPrenom()+" "+ad.getNom());
             participantList.add(p);
         }
-        CoursEnseignantParticipants coursResultat = new CoursEnseignantParticipants(
-                cours.getNumCours(),
-                cours.getTitre(),
-                cours.getNiveau(),
-                cours.getDate(),
-                cours.getLieu(),
-                cours.getDuree(),
-                cours.getIdEnseignant(),
-                participantList
-                );
-        return coursResultat;
+        cours.setListeParticipants(participantList);
+        return cours;
     }
 
     @Override
-    public CoursEnseignantParticipants participerCours(CoursEnseignantParticipants cours, Long idParticipant) {
-        return null;
+    public CoursDTO participerCours(CoursDTO cours, Long idParticipant) {
+        List<Participant> liste = cours.getListeParticipants();
+        for(Participant p: liste){
+            if(Objects.equals(p.getNumMembre(), idParticipant)){
+                p.setPresence(true);
+            }
+        }
+        cours.setListeParticipants(liste);
+        return cours;
     }
 
     @Override
-    public CoursEnseignantParticipants creerCours(CoursEnseignant cours) throws MauvaisNiveauException {
+    public CoursDTO creerCours(CoursDTO cours) throws MauvaisNiveauException {
         Long idEnseignant = cours.getIdEnseignant();
         int niveauCours = cours.getNiveau();
         checkNiveauEnseignant(idEnseignant, niveauCours);
         // Ajouter les participants
-        CoursEnseignantParticipants coursFinal = ajouterParticipants(niveauCours, cours);
+        CoursDTO coursFinal = ajouterParticipants(niveauCours, cours);
         System.out.println(coursFinal.toString());
         // Appel REST sur MS-gestion-cours pour ajouter le cours avec les bonnes informations
-        this.coursMSFeignClient.creerCours(coursFinal);
-        return null;
+        return this.coursMSFeignClient.creerCours(coursFinal);
     }
 
     @Override
-    public CoursEnseignantParticipants getCoursEnseignantParticipants(Long idCours) {
-        CoursEnseignantParticipants cours = this.coursMSFeignClient.getCours(idCours);
+    public CoursDTO getCoursEnseignantParticipants(Long idCours) {
+        CoursDTO cours = this.coursMSFeignClient.getCours(idCours);
         return ajouterParticipants(cours.getNiveau(), cours);
     }
 }

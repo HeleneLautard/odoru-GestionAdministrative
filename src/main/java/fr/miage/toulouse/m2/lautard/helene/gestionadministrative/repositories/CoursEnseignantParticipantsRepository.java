@@ -1,5 +1,6 @@
 package fr.miage.toulouse.m2.lautard.helene.gestionadministrative.repositories;
 
+import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO.CoursDTO;
 import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO.CoursEnseignant;
 import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO.CoursEnseignantParticipants;
 import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.exceptions.MauvaisNiveauException;
@@ -24,7 +25,7 @@ public interface CoursEnseignantParticipantsRepository {
      * @param cours cours que l'on souhaite créer
      * @return cours
      */
-    public CoursEnseignantParticipants ajouterParticipants(int niveau, CoursEnseignant cours);
+    public CoursDTO ajouterParticipants(int niveau, CoursDTO cours);
 
     /**
      * Enregistrer la participation d'un élève à un cours
@@ -32,19 +33,19 @@ public interface CoursEnseignantParticipantsRepository {
      * @param idParticipant
      * @return
      */
-    public CoursEnseignantParticipants participerCours(CoursEnseignantParticipants cours, Long idParticipant);
+    public CoursDTO participerCours(CoursDTO cours, Long idParticipant);
 
     /**
      * Créer un nouveau cours
      * @param cours cours que l'on souhaite créer
      * @return
      */
-    public CoursEnseignantParticipants creerCours(CoursEnseignant cours) throws MauvaisNiveauException;
+    public CoursDTO creerCours(CoursDTO cours) throws MauvaisNiveauException;
 
     /**
      * Récupérer un cours avec les informations de l'enserignant et des participations
      * @param idCours identifiant du cours
      * @return
      */
-    public CoursEnseignantParticipants getCoursEnseignantParticipants(Long idCours);
+    public CoursDTO getCoursEnseignantParticipants(Long idCours);
 }

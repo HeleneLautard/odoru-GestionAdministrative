@@ -1,10 +1,16 @@
 package fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class CoursDTO {
 
     private Long numCours;
@@ -15,9 +21,9 @@ public class CoursDTO {
     private String lieu;
     private Long duree;
     private Long idEnseignant;
-    List<Long> listeParticipants;
+    List<Participant> listeParticipants;
 
-    public CoursDTO(String titre, int niveau,Date date, String lieu, Long duree, Long idEnseignant, List<Long> listeParticipants) {
+    public CoursDTO(String titre, int niveau,Date date, String lieu, Long duree, Long idEnseignant, List<Participant> listeParticipants) {
 
         this.titre = titre;
         this.niveau = niveau;
