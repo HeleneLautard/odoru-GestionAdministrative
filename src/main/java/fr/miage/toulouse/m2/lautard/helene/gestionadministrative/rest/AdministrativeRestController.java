@@ -19,11 +19,21 @@ public class AdministrativeRestController {
     CoursEnseignantParticipantsRepository coursEnseignantParticipantsRepository;
     ModelMapper modelMapper = new ModelMapper();
 
+    /**
+     * Récupérer un cours avec les informations de l'enseignant et des participants
+     * @param id id du cours
+     * @return CoursDTO
+     */
     @GetMapping(path="/cours/{id}")
     public CoursDTO getCoursParticipantsEnseignant(@PathVariable("id") Long id){
         return this.coursEnseignantParticipantsRepository.getCoursEnseignantParticipants(id);
     }
 
+    /**
+     * Création d'un cours avec vérification métier (date et niveau de l'enseignant)
+     * @param cours CoursDTO
+     * @return CoursDTO
+     */
     @PostMapping(path="/cours")
     public CoursDTO creerCours(@RequestBody CoursDTO cours){
         try{
@@ -32,6 +42,17 @@ public class AdministrativeRestController {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, ex.getMessage());
         }
+    }
+
+    /**
+     * Enregistrer la participation d'une personne à un cours
+     * @param idCours numéro du cours
+     * @param idMembre id du membre
+     * @return Cours mis à jour
+     */
+    @PutMapping(path="/cours/{idCours}/participer/{idMembre}")
+    public CoursDTO participerCours(@PathVariable("idCours") Long idCours, @PathVariable("idMembre") Long idMembre){
+        return this.coursEnseignantParticipantsRepository.participerCours(idCours, idMembre);
     }
 
 }

@@ -42,7 +42,8 @@ public class CoursEnseignantParticipantsRepositoryImpl implements CoursEnseignan
     }
 
     @Override
-    public CoursDTO participerCours(CoursDTO cours, Long idParticipant) {
+    public CoursDTO participerCours(Long idCours, Long idParticipant) {
+        CoursDTO cours = this.getCoursEnseignantParticipants(idCours);
         List<Participant> liste = cours.getListeParticipants();
         for(Participant p: liste){
             if(Objects.equals(p.getNumMembre(), idParticipant)){

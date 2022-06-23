@@ -29,11 +29,11 @@ public interface CoursEnseignantParticipantsRepository {
 
     /**
      * Enregistrer la participation d'un élève à un cours
-     * @param cours
+     * @param idCours
      * @param idParticipant
      * @return
      */
-    public CoursDTO participerCours(CoursDTO cours, Long idParticipant);
+    public CoursDTO participerCours(Long idCours, Long idParticipant);
 
     /**
      * Créer un nouveau cours
