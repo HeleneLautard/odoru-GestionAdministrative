@@ -51,6 +51,8 @@ public class CoursEnseignantParticipantsRepositoryImpl implements CoursEnseignan
             }
         }
         cours.setListeParticipants(liste);
+        //Envoyer le nouveau cours sur ms-cours pour modification en base
+        this.coursMSFeignClient.updateCours(cours);
         return cours;
     }
 

@@ -1,8 +1,6 @@
 package fr.miage.toulouse.m2.lautard.helene.gestionadministrative.repositories;
 
 import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO.CoursDTO;
-import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO.CoursEnseignant;
-import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.DTO.CoursEnseignantParticipants;
 import fr.miage.toulouse.m2.lautard.helene.gestionadministrative.exceptions.MauvaisNiveauException;
 import org.springframework.stereotype.Repository;
 

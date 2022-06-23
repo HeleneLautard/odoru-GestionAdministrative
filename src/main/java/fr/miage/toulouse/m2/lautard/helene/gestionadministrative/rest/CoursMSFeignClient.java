@@ -20,6 +20,12 @@ public interface CoursMSFeignClient {
             consumes = "application/json" )
     CoursDTO creerCours(@RequestBody CoursDTO coursFinal);
 
+    @RequestMapping(method = RequestMethod.PUT,
+            value="/cours",
+            produces= "application/json",
+            consumes = "application/json" )
+    CoursDTO updateCours(@RequestBody CoursDTO coursFinal);
+
     @RequestMapping(method = RequestMethod.GET,
             value="/cours/{id}",
             produces= "application/json"
